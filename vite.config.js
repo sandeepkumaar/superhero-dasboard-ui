@@ -7,10 +7,11 @@ export default defineConfig(({ mode }) => {
   * loads only VITE_* env variables
   * 2nd arg "env" specfies path where env files are located
  */
+  //const env = process.env.NODE_ENV;
   const viteEnv = loadEnv(mode, "env");   
   console.log('viteEnv', viteEnv);
   return {
-    base: viteEnv.VITE_BASE_URL || '/',
+    //base: viteEnv.VITE_BASE_URL || '/',
     plugins: [
       react(),
       splitVendorChunkPlugin(),

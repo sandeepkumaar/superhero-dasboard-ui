@@ -2,7 +2,11 @@ import createFetchJson from './fetch';
 
 const fetchJson = createFetchJson(import.meta.env.VITE_SERVICE_HOST);
 
-export async function getGreetMessage() {
-  return fetchJson(`/api/message`, { method: 'GET' });
+export async function fetchAllSuperHeroes() {
+  return fetchJson(`/superheroes/all`, { method: 'GET' })
+    .then(results => {
+      console.log(results);
+      return 'from api';
+    })
 };
 

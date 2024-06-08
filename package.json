@@ -5,7 +5,7 @@
   "main": "main.jsx",
   "scripts": {
     "start": "run-s build serve",
-    "start:local": "cross-env NODE_ENV=local-dev vite --debug --force",
+    "start:local": "vite --mode local_dev --debug --force",
     "build": "vite build",
     "serve": "vite preview",
     "test": "tape -r ./esbuild-register.js 'src/**/*.test.+(js|jsx)' | tap-nirvana",

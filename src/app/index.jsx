@@ -1,9 +1,9 @@
 import { Form, Outlet, useLoaderData } from 'react-router-dom';
 
-import { getGreetMessage } from '../service';
+import { fetchAllSuperHeroes } from '../service';
 
 export function loader({request}) {
-  return getGreetMessage();
+  return fetchAllSuperHeroes();
 };
 
 export default function App() {

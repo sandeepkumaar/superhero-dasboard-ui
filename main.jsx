@@ -13,10 +13,8 @@ async function enableMocking() {
 };
 
 import { createRoot } from 'react-dom/client';
-//import App from './src/index.jsx';
 const container = document.getElementById('react-root')
 const root = createRoot(container);
-//root.render(<App/>);
 
 enableMocking().then(async () => {
   console.log('Render App')
@@ -28,17 +26,14 @@ enableMocking().then(async () => {
 /**
  * env vs mode
  * https://vitejs.dev/guide/env-and-mode.html#modes
- * $ vite         // mode: developement. runs in dev server with watch/hmr
- * $ vite build   // mode: production. deployable code
- * Purpose of "mode" is to tells us whether we are in devServer or build
- * 
- * "vite build" can combine with NODE_ENV to tell vite to load corresponding .env.* file for variables
- * which is used for build modification and feature flags
- * NODE_ENV=developement vite build - builds code with .env.developement config
- * NODE_ENV=production vite build == vite bulid  (here NODE_ENV is supplied by vite only for this case)
- * use "import.meta.env.MODE|DEV" to identify whether app is running on devServer mode or build Mode
- * use "immport.meta.env.VITE_*" to use it during build mode
+ * Use only mode. process.env.NODE_ENV is simulated in browser and its not reliable.
+ * So for getting different builds and load .envs for different behaviours use --mode 
+ * $ vite --mode local // uses .env.local in serve
+ * $ vite build --mode staging // uses env.staging in build
+ * $ vite build // uses env.production in build
 */
 
 console.log('mode', import.meta.env.MODE);
+/* Dont use NODE_ENV within code - its confusing in vite */
+console.log('NODE_ENV', process.env.NODE_ENV);
 console.log('VITE_SERVICE_HOST',import.meta.env.VITE_SERVICE_HOST); 
