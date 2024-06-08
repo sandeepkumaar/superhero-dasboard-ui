@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "noEmit": true,
+
+    "module": "nodenext", // esm vs cjs
+    "moduleResolution": "nodenext", //node's module resolution
+    "lib": ["esnext", "dom"], // support types for DOM, ESNext
+
+    // UI
+    "jsx": "react-jsx", // support react JSX, no react import required
+
+    "strict": true, // enables few useful typechecking - noImplicitAny,..etc
+    "noImplicitReturns": true
+  },
+  "include": ["main.jsx", "src/**/*"]
+
+}
