@@ -11,10 +11,17 @@ export async function fetchAllSuperHeroes() {
 };
 
 export async function fetchHeroesByPublishers() {
-  return fetchJson(`/superheroes/groupby/publishers`, { method: 'GET' })
+  return fetchJson(`/superheroes/groupby/publisher`, { method: 'GET' })
     .then(results => {
       console.log(results);
       return results;
     })
 };
 
+export async function fetchHeroesByGender() {
+  return fetchJson(`/superheroes/groupby/gender`, { method: 'GET' })
+    .then(results => {
+      console.log(results);
+      return results;
+    })
+};

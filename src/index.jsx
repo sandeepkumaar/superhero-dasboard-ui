@@ -4,6 +4,7 @@ import {
 } from 'react-router-dom'
 
 import './root.css'
+import './index.css'
 import App, {loader as appLoader} from './app/index.jsx';
 import ErrorPage from './error-page.jsx';
 
