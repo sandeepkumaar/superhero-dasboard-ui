@@ -85,7 +85,7 @@ export default function PieChart({
   };
   return (
 
-    <Card className='w-full h-full p-8'>
+    <Card className='w-full h-full p-4'>
         <Pie data={labelDataSets} width={360} height={360} options={options}></Pie>
     </Card>
 

@@ -10,6 +10,14 @@ import {
 import { Bar } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { splitLabelData } from "./utils.js";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 
 ChartJS.register(
   CategoryScale,
@@ -84,5 +92,9 @@ export function BarChart({ data: barData, labelKey = "", dataKey = "" }) {
       },
     ],
   };
-  return <Bar options={options} data={labelDataSets} />;
+  return (
+    <Card className='h-full p-4'>
+      <Bar options={options} data={labelDataSets} />
+    </Card>
+  )
 }
