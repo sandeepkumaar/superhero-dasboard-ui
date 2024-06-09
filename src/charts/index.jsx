@@ -8,34 +8,17 @@ import {
 import { Pie } from "react-chartjs-2";
 import { splitLabelData } from "./utils.js";
 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+
 ChartJS.register(ArcElement, Tooltip, Legend, Colors);
 /*
-export const data1 = {
-  labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-  datasets: [
-    {
-      label: "# of Votes",
-      data: [12, 19, 3, 5, 2, 3],
-      backgroundColor: [
-        "rgba(255, 99, 132, 0.2)",
-        "rgba(54, 162, 235, 0.2)",
-        "rgba(255, 206, 86, 0.2)",
-        "rgba(75, 192, 192, 0.2)",
-        "rgba(153, 102, 255, 0.2)",
-        "rgba(255, 159, 64, 0.2)",
-      ],
-      borderColor: [
-        "rgba(255, 99, 132, 1)",
-        "rgba(54, 162, 235, 1)",
-        "rgba(255, 206, 86, 1)",
-        "rgba(75, 192, 192, 1)",
-        "rgba(153, 102, 255, 1)",
-        "rgba(255, 159, 64, 1)",
-      ],
-      borderWidth: 1,
-    },
-  ],
-};
 const colors = {
   backgroundColor: [
     "rgba(100 116 139, 1)",
@@ -61,11 +44,23 @@ const colors = {
 */
 // Chart options to display legends on the right
 const options = {
-  maintainAspectRatio: false,
+  responsive: true,
+ maintainAspectRatio: false,
   plugins: {
     legend: {
       display: true,
-      position: "right", // Positioning the legend to the right
+      position: "bottom", // Positioning the legend to the right
+    },
+    title: {
+      display: true,
+      text: "Gender",
+      align: "start",
+      color: "#020816",
+      font: {
+        size: 16,
+        weight: 'bold',
+        lineHeight: 1.2,
+      },
     },
   },
 };
@@ -75,7 +70,7 @@ export default function PieChart({
   dataKey = "",
 }) {
   let { labels, data } = splitLabelData(pieData, labelKey, dataKey);
-  console.log('pieData', {labels, data});
+  // console.log('pieData', {labels, data});
   let labelDataSets = {
     labels,
     datasets: [
@@ -88,5 +83,20 @@ export default function PieChart({
       },
     ],
   };
-  return <Pie data={labelDataSets} options={options}></Pie>;
+  return (
+
+    <Card className='w-full h-full p-8'>
+        <Pie data={labelDataSets} width={360} height={360} options={options}></Pie>
+    </Card>
+
+  )
 }
+/*
+<Card>
+  <CardHeader className='p-8'>
+    <CardTitle>Card Title</CardTitle>
+  </CardHeader>
+  <CardContent>
+  </CardContent>
+</Card>
+*/

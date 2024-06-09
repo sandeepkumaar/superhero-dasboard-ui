@@ -48,7 +48,14 @@ export const options = {
     },
     title: {
       display: true,
-      text: "Chart.js Horizontal Bar Chart",
+      text: "Publishers",
+      align: "start",
+      color: "#020816",
+      font: {
+        size: 16,
+        weight: 'bold',
+        lineHeight: 1.2,
+      },
     },
     datalabels: {
       anchor: "end",
@@ -66,7 +73,7 @@ export const options = {
 
 export function BarChart({ data: barData, labelKey = "", dataKey = "" }) {
   let { labels, data } = splitLabelData(barData, labelKey, dataKey);
-  console.log("bar", { labels, data }, barData);
+  //console.log("bar", { labels, data }, barData);
   let labelDataSets = {
     labels,
     datasets: [
