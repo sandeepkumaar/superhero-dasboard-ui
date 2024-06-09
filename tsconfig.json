@@ -12,8 +12,11 @@
     "jsx": "react-jsx", // support react JSX, no react import required
 
     "strict": true, // enables few useful typechecking - noImplicitAny,..etc
-    "noImplicitReturns": true
+    "noImplicitReturns": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
   "include": ["main.jsx", "src/**/*"]
-
 }

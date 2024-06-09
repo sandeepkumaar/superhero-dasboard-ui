@@ -10,3 +10,11 @@ export async function fetchAllSuperHeroes() {
     })
 };
 
+export async function fetchHeroesByPublishers() {
+  return fetchJson(`/superheroes/groupby/publishers`, { method: 'GET' })
+    .then(results => {
+      console.log(results);
+      return results;
+    })
+};
+

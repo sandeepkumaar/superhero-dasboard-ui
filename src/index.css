@@ -98,6 +98,7 @@ form[action$="destroy"] button {
 
 #react-root {
   display: flex;
+  flex-direction: column;
   height: 100%;
   width: 100%;
 }

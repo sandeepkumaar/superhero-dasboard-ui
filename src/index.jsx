@@ -3,10 +3,16 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
-import './index.css'
+import './root.css'
 import App, {loader as appLoader} from './app/index.jsx';
 import ErrorPage from './error-page.jsx';
 
+
+function NotFound() {
+  return (
+    <h4>Not Found</h4>
+  )
+}
 
 /**
  * Routes
@@ -19,6 +25,10 @@ const router = createBrowserRouter(
       loader: appLoader,
       Component: App,
       ErrorBoundary: ErrorPage,
+    },
+    {
+      path: '*',
+      Component: NotFound,
     }
   ]
 )

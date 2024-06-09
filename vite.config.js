@@ -1,5 +1,6 @@
 import { defineConfig, splitVendorChunkPlugin, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
+import path from "path";
 
 
 export default defineConfig(({ mode }) => {
@@ -14,13 +15,16 @@ export default defineConfig(({ mode }) => {
     //base: viteEnv.VITE_BASE_URL || '/',
     plugins: [
       react(),
-      splitVendorChunkPlugin(),
+      //splitVendorChunkPlugin(),
     ],
-    build: {
-      outDir: 'public',
-      emptyOutDir: false
+    resolve: {
+      alias: {
+        /* for components */
+        "@": path.resolve(__dirname, "./src"),
+      },
     },
-    envDir: "env"
+    envDir: "env",
+    base: './',
   }
 }
 );

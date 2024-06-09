@@ -35,6 +35,7 @@ export default function createFetchJson(baseUrl, defaultOpts={}) {
     return fetch(url, opts)
       .then(async response => {
         let { ok, statusText } = response;
+        console.log('fetch::', ok, statusText);
         if(!ok) {
           throw await getResponseError(response);
         };

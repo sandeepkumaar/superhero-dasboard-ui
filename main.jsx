@@ -2,7 +2,7 @@
 
 async function enableMocking() {
   // enable only on devServer mode
-  if (import.meta.env.DEV) {
+  if (/*import.meta.env.DEV*/ false) {
     const { worker } = await import('./mocks/index.js')
 
     // `worker.start()` returns a Promise that resolves

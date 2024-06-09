@@ -1,14 +1,33 @@
 import { Form, Outlet, useLoaderData } from 'react-router-dom';
+import PieChart from '../charts/index.jsx';
+import { Button } from '../components/ui/button.jsx';
 
-import { fetchAllSuperHeroes } from '../service';
+import { 
+  fetchAllSuperHeroes ,
+  fetchHeroesByPublishers,
+} from '../service';
 
-export function loader({request}) {
-  return fetchAllSuperHeroes();
+export async function loader({request}) {
+  //return fetchAllSuperHeroes();
+  let {data: heroesByPublishers} = await fetchHeroesByPublishers();
+  return {
+    heroesByPublishers
+  }
 };
 
 export default function App() {
-  const {message} = useLoaderData();
+  const {heroesByPublishers} = useLoaderData();
   return (
-    <h3>{message}</h3>
+    <div>
+      <h3>Hi</h3>
+      <div>
+        <Button> Submit </Button>
+      </div>
+      <div>
+        <PieChart data={heroesByPublishers}></PieChart>
+      </div>
+
+
+    </div>
   );
 }
