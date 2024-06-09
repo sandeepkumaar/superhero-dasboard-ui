@@ -27,7 +27,7 @@ export default function App() {
   heroesByPublishers = [...maxPublishers, {count: minPublishers.length, publisher: 'Others'}]
   return (
     <div className='relative flex min-h-screen flex-col bg-background'>
-      <header className='header sticky top-0 z-50 row-span-1 h-16 p-4 bg-primary text-primary-foreground'>
+      <header className='header sticky top-0 z-50 row-span-1 h-16 p-4 mb-4 bg-primary text-primary-foreground'>
         <h4 className='scroll-m-20 text-xl tracking-tight'>Super Hero App</h4>
       </header>
       <main className='main flex-1 pb-8 container grid grid-cols-6 grid-rows-1 gap-x-8'>
