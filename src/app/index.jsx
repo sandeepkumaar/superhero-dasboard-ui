@@ -10,15 +10,16 @@ import {
   fetchHeroesByGender,
   fetchHeroesByProperty,
 } from "../service";
+import {useCheckComponent} from '../utils.jsx';
 
 export async function loader({ request }) {
-  console.log("App Loader Called");
   const url = new URL(request.url);
   const publisher = url.searchParams.get("publisher");
-  //console.log('query', publisher);
-  if (publisher) {
-    console.log("App Loader Called :: Publisher", publisher);
-    //let {data: heroesByPublishers} = await fetchHeroesByProperty('publisher');
+  console.log("App Loader Called ::", publisher);
+  //if (publisher) {
+    let {data: heroesByPublishers} = await fetchHeroesByProperty('publisher', {
+      publisher
+    });
     let { data: heroesByGender } = await fetchHeroesByProperty("gender", {
       publisher,
     });
@@ -29,26 +30,26 @@ export async function loader({ request }) {
       publisher,
     });
     return {
-      //heroesByPublishers,
+      heroesByPublishers,
       heroesByGender,
       heroesByAlignment,
       heroesByRace,
     };
-  }
-  let { data: heroesByPublishers } = await fetchHeroesByProperty("publisher");
-  let { data: heroesByGender } = await fetchHeroesByProperty("gender");
-  let { data: heroesByAlignment } = await fetchHeroesByProperty("alignment");
-  let { data: heroesByRace } = await fetchHeroesByProperty("race");
-  return {
-    heroesByPublishers,
-    heroesByGender,
-    heroesByAlignment,
-    heroesByRace,
-  };
+ //}
+  //let { data: heroesByPublishers } = await fetchHeroesByProperty("publisher");
+  //let { data: heroesByGender } = await fetchHeroesByProperty("gender");
+  //let { data: heroesByAlignment } = await fetchHeroesByProperty("alignment");
+  //let { data: heroesByRace } = await fetchHeroesByProperty("race");
+  //return {
+  //  heroesByPublishers,
+  //  heroesByGender,
+  //  heroesByAlignment,
+  //  heroesByRace,
+  //};
 }
 
 export async function action({ request }) {
-  console.log("App Action Called");
+  console.log("App Action Called ::");
   let formData = await request.formData();
   let publisher = formData.get("publisher");
   let { data: heroesByGender } = await fetchHeroesByProperty("gender", {
@@ -83,6 +84,7 @@ const consolidateRacers = function (data = []) {
 };
 
 export default function App() {
+  useCheckComponent('App');
   let loaderData = useLoaderData();
   // to group minPublishers as 'Others'
   let heroesByPublishers = consolidatePublishers(loaderData.heroesByPublishers);
@@ -97,6 +99,7 @@ export default function App() {
   );
 
   let fetcher = useFetcher();
+  console.log('App Fetcher state ::', fetcher.state);
   useEffect(() => {
     if (!fetcher.data) return;
     let { heroesByGender, heroesByAlignment, heroesByRace } = fetcher.data;
@@ -111,7 +114,6 @@ export default function App() {
       fetcher.load(`/?publisher=${publisher}`);
     }
   }, [publisher]);
-  console.log("fetcher", fetcher.data);
 
   const handlePublisherChartClick = function (name) {
     setPublisher(name);
@@ -146,7 +148,7 @@ export default function App() {
             data={heroesByAlignment}
             labelKey="alignment"
             dataKey="count"
-            option={{ titleOpts: { text: getTitle("Gender") } }}
+            option={{ titleOpts: { text: getTitle("Alignment") } }}
           />
           <div className="col-span-2">
             <PieChart

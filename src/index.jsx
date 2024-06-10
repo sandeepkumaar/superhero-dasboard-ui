@@ -28,10 +28,10 @@ const router = createBrowserRouter(
       Component: App,
       ErrorBoundary: ErrorPage,
     },
-    {
-      path: '*',
-      Component: NotFound,
-    }
+    //{
+    //  path: '*',
+    //  Component: NotFound,
+    //}
   ]
 )
 
