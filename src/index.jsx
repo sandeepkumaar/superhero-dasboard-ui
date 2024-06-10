@@ -1,15 +1,18 @@
 import {
   RouterProvider,
   createBrowserRouter,
+  Navigate,
 } from 'react-router-dom'
 
 import './root.css'
 import './index.css'
-import App, {loader as appLoader, action as appAction} from './app/index.jsx';
+import App  from './app.jsx';
+import Dashboard, {loader as dashboardLoader}  from './dashboard/index.jsx';
+import DashboardCharts, {loader as chartLoader}  from './dashboard/charts.jsx';
 import ErrorPage from './error-page.jsx';
 
 
-function NotFound() {
+function Sample() {
   return (
     <h4>Not Found</h4>
   )
@@ -19,19 +22,29 @@ function NotFound() {
  * Routes
  */
 const router = createBrowserRouter(
-  [
-    {
+  [ {
       path: '/',
-      //loader: () => ({message: 'hello world'}),
-      loader: appLoader,
-      action: appAction,
       Component: App,
       ErrorBoundary: ErrorPage,
+      children: [
+        {
+          index: true,
+          element: <Navigate to="/dashboard/charts" replace />,
+        },
+        {
+          path: 'dashboard',
+          loader: dashboardLoader,
+          Component: Dashboard,
+          children: [
+            {
+              path: 'charts',
+              loader: chartLoader,
+              Component: DashboardCharts,
+            }
+          ]
+        }
+      ]
     },
-    //{
-    //  path: '*',
-    //  Component: NotFound,
-    //}
   ]
 )
 

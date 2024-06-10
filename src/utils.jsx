@@ -1,7 +1,7 @@
 import {useEffect} from 'react'
 
 export function useCheckComponent(name) {
-  console.log('called');
+  //console.log('called');
   useEffect(() => {
     console.log(name,':: Rendered')
   })
