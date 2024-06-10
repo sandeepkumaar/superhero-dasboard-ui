@@ -5,7 +5,7 @@ import {
 
 import './root.css'
 import './index.css'
-import App, {loader as appLoader} from './app/index.jsx';
+import App, {loader as appLoader, action as appAction} from './app/index.jsx';
 import ErrorPage from './error-page.jsx';
 
 
@@ -24,6 +24,7 @@ const router = createBrowserRouter(
       path: '/',
       //loader: () => ({message: 'hello world'}),
       loader: appLoader,
+      action: appAction,
       Component: App,
       ErrorBoundary: ErrorPage,
     },

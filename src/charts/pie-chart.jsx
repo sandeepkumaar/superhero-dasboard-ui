@@ -44,7 +44,7 @@ const colors = {
 */
 // Chart options to display legends on the right
 
-const getOptions = function({titleOpts, legendOpts}) {
+const getOptions = function({titleOpts={}, legendOpts={}}) {
   return  {
     responsive: true,
     maintainAspectRatio: false,

@@ -25,3 +25,11 @@ export async function fetchHeroesByGender() {
       return results;
     })
 };
+
+export async function fetchHeroesByProperty(property, data) {
+  return fetchJson(`/superheroes/groupby/${property}`, { method: 'POST', body: data})
+    .then(results => {
+      console.log(results);
+      return results;
+    })
+};

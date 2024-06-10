@@ -23,28 +23,32 @@ ChartJS.register(
   ChartDataLabels
 );
 
-export const options = {
-  maintainAspectRatio: false,
-  plugins: {
-    legend: {
-      display: true,
-      position: "bottom", // Positioning the legend to the right
-    },
-    title: {
-      display: true,
-      text: "Character Alignment",
-      align: "start",
-      color: "#020816",
-      font: {
-        size: 16,
-        weight: 'bold',
-        lineHeight: 1.2,
+const getOptions = ({titleOpts={}, legendOpts={}}) => {
+  return {
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: true,
+        position: "bottom", // Positioning the legend to the right
+        ...legendOpts,
+      },
+      title: {
+        display: true,
+        text: "Character Alignment",
+        align: "start",
+        color: "#020816",
+        font: {
+          size: 16,
+          weight: 'bold',
+          lineHeight: 1.2,
+        },
+        ...titleOpts,
       },
     },
-  },
-};
+  };
+}
 
-export function DoughnutChart({ data: doughnutData, labelKey = "", dataKey = "" }) {
+export function DoughnutChart({ data: doughnutData, labelKey = "", dataKey = "", option }) {
   let { labels, data } = splitLabelData(doughnutData, labelKey, dataKey);
   //console.log("bar", { labels, data }, barData);
   let labelDataSets = {
@@ -59,7 +63,7 @@ export function DoughnutChart({ data: doughnutData, labelKey = "", dataKey = "" 
   };
   return (
     <Card className='h-full p-4'>
-      <Doughnut options={options} data={labelDataSets} />
+      <Doughnut options={getOptions(option)} data={labelDataSets} />
     </Card>
   )
 }
