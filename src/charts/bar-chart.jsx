@@ -1,3 +1,4 @@
+import { useRef, useEffect } from 'react'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -7,7 +8,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Bar } from "react-chartjs-2";
+import { Bar, getDatasetAtEvent, getElementAtEvent, getElementsAtEvent } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { splitLabelData } from "./utils.js";
 import {
@@ -79,7 +80,11 @@ export const options = {
   },
 };
 
-export function BarChart({ data: barData, labelKey = "", dataKey = "" }) {
+export function BarChart({ data: barData, labelKey = "", dataKey = "", onClick={onClick}}) {
+  const chartRef = useRef()
+  useEffect(() => {
+    console.log('BarChart Render');
+  });
   let { labels, data } = splitLabelData(barData, labelKey, dataKey);
   //console.log("bar", { labels, data }, barData);
   let labelDataSets = {
@@ -92,9 +97,21 @@ export function BarChart({ data: barData, labelKey = "", dataKey = "" }) {
       },
     ],
   };
+  const handleClick = (event) => {
+    //console.log('getDatasetAtEvent', getDatasetAtEvent(chartRef.current, event));
+    //console.log('getElementAtEvent', getElementAtEvent(chartRef.current, event));
+    //console.log('getElementsAtEvent', getElementsAtEvent(chartRef.current, event));
+    let events = getElementAtEvent(chartRef.current, event);
+    if(events?.length) {
+      let index = events[0]?.index;
+      //console.log('index', labels[index]);
+      onClick(labels[index]);
+    }
+    return;
+  }
   return (
     <Card className='h-full p-4'>
-      <Bar options={options} data={labelDataSets} />
+      <Bar options={options} data={labelDataSets} onClick={handleClick} ref={chartRef}/>
     </Card>
   )
 }
