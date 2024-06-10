@@ -19,6 +19,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import {Form} from 'react-router-dom';
+import {ArrowDownLeftFromSquare} from 'lucide-react';
 
 ChartJS.register(
   CategoryScale,
@@ -80,7 +82,7 @@ export const options = {
   },
 };
 
-export function BarChart({ data: barData, labelKey = "", dataKey = "", onClick={onClick}}) {
+export function BarChart({ data: barData, labelKey = "", dataKey = "", onClick}) {
   const chartRef = useRef()
   useEffect(() => {
     console.log('BarChart Render');
@@ -108,6 +110,7 @@ export function BarChart({ data: barData, labelKey = "", dataKey = "", onClick={
       onClick(labels[index]);
     }
     return;
+
   }
   return (
     <Card className='h-full p-4'>

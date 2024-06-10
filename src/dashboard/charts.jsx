@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useSubmit } from 'react-router-dom';
 import { PieChart, BarChart, DoughnutChart } from "../charts/index.jsx";
 import {
   fetchHeroesByProperty,
@@ -41,6 +41,7 @@ export default function ChartDashboard() {
     publisher,
   } = useLoaderData();
   
+  let submit = useSubmit();
 
   heroesByRace = consolidateRacers(heroesByRace)
  
@@ -51,7 +52,11 @@ export default function ChartDashboard() {
   //let [heroesByAlignment, setHeroesByAlignment] = useState(
   //  loaderData.heroesByAlignment
   //);
-
+  
+  let handleGenderClick = (gender) => {
+    let payload = { gender, publisher };
+    return submit(payload, {method: 'post', action:'/superhero-table', encType: 'application/json'})
+  }
   const getTitle = (title) => {
     return publisher ? `${publisher}: ${title}` : title;
   };
@@ -62,6 +67,7 @@ export default function ChartDashboard() {
         labelKey="gender"
         dataKey="count"
         option={{ titleOpts: { text: getTitle("Gender") } }}
+        onClick={handleGenderClick}
       />
       <DoughnutChart
         data={heroesByAlignment}

@@ -9,6 +9,7 @@ import './index.css'
 import App  from './app.jsx';
 import Dashboard, {loader as dashboardLoader}  from './dashboard/index.jsx';
 import DashboardCharts, {loader as chartLoader}  from './dashboard/charts.jsx';
+import SuperHeroTable, {action as superHeroAction } from './superhero-table/index.jsx';
 import ErrorPage from './error-page.jsx';
 
 
@@ -29,7 +30,7 @@ const router = createBrowserRouter(
       children: [
         {
           index: true,
-          element: <Navigate to="/dashboard/charts" replace />,
+          element: <Navigate to="dashboard/charts" replace />,
         },
         {
           path: 'dashboard',
@@ -37,11 +38,20 @@ const router = createBrowserRouter(
           Component: Dashboard,
           children: [
             {
+              index: true,
+              element: <Navigate to="charts" replace />,
+            },
+            {
               path: 'charts',
               loader: chartLoader,
               Component: DashboardCharts,
             }
           ]
+        },
+        {
+          path: 'superhero-table',
+          action: superHeroAction,
+          Component: SuperHeroTable
         }
       ]
     },

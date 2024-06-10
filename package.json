@@ -27,10 +27,12 @@
   "license": "ISC",
   "dependencies": {
     "@radix-ui/react-slot": "^1.0.2",
+    "@tanstack/react-table": "^8.17.3",
     "chart.js": "^4.4.3",
     "chartjs-plugin-datalabels": "^2.2.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "just-filter-object": "^3.2.0",
     "just-partition": "^2.2.0",
     "lucide-react": "^0.390.0",
     "react": "^18.3.1",

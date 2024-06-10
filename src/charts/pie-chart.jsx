@@ -1,3 +1,4 @@
+import {useRef} from 'react'
 import {
   Chart as ChartJS,
   ArcElement,
@@ -5,7 +6,7 @@ import {
   Legend,
   Colors,
 } from "chart.js";
-import { Pie } from "react-chartjs-2";
+import { Pie, getElementAtEvent } from "react-chartjs-2";
 import { splitLabelData } from "./utils.js";
 
 import {
@@ -68,14 +69,16 @@ const getOptions = function({titleOpts={}, legendOpts={}}) {
       },
     },
   };
-
 }
+
 export function PieChart({
   data: pieData,
   labelKey = "",
   dataKey = "",
-  option={}
+  option={},
+  onClick
 }) {
+  const chartRef = useRef();
   let { labels, data } = splitLabelData(pieData, labelKey, dataKey);
   //console.log('pieData', {labels, data});
   let labelDataSets = {
@@ -90,11 +93,20 @@ export function PieChart({
       },
     ],
   };
+  let handleClick = (event) => {
+    let events = getElementAtEvent(chartRef.current, event);
+    if(events?.length) {
+      let index = events[0]?.index;
+      //console.log('index', labels[index], events);
+      onClick(labels[index]);
+    }
+    return;
+  }
   let options = getOptions(option);
   return (
 
     <Card className='w-full h-full p-4'>
-        <Pie data={labelDataSets} width={360} height={360} options={options}></Pie>
+        <Pie data={labelDataSets} width={360} height={360} options={options} onClick={handleClick} ref={chartRef}></Pie>
     </Card>
 
   )

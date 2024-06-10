@@ -3,11 +3,14 @@ import filterObj from 'just-filter-object'
 
 const fetchJson = createFetchJson(import.meta.env.VITE_SERVICE_HOST);
 
-export async function fetchAllSuperHeroes() {
-  return fetchJson(`/superheroes/all`, { method: 'GET' })
+const defined = (key, value) => value !== undefined && value !== null
+
+export async function fetchSuperHeroes(payload) {
+  let body = filterObj(payload, defined);
+  return fetchJson(`/superheroes/search`, { method: 'POST', body })
     .then(results => {
       console.log(results);
-      return 'from api';
+      return results;
     })
 };
 
@@ -27,8 +30,8 @@ export async function fetchHeroesByGender() {
     })
 };
 
-export async function fetchHeroesByProperty(property, data) {
-  let body = filterObj(data, (key, value) => value !== undefined && value !== null)
+export async function fetchHeroesByProperty(property, payload) {
+  let body = filterObj(payload, defined);
   return fetchJson(`/superheroes/groupby/${property}`, { method: 'POST', body})
     .then(results => {
       //console.log(results);
