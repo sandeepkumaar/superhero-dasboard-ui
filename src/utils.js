@@ -1,4 +1,2 @@
 
-export function defined(key, val) {
-  return val !== undefined && val !== null
-}
+export const defined = (key, value) => value !== undefined && value !== null

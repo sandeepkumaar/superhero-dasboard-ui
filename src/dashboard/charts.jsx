@@ -1,6 +1,5 @@
-import {useState} from 'react'
-import { useLoaderData, useSubmit, useNavigate, createSearchParams } from 'react-router-dom';
-import { PieChart, BarChart, DoughnutChart } from "../charts/index.jsx";
+import { useLoaderData, useNavigate } from 'react-router-dom';
+import { PieChart, DoughnutChart } from "../charts/index.jsx";
 import {
   fetchHeroesByProperty,
 } from "../service";

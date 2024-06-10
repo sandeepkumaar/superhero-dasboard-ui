@@ -8,19 +8,12 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Bar, getDatasetAtEvent, getElementAtEvent, getElementsAtEvent } from "react-chartjs-2";
+import { Bar, getElementAtEvent } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { splitLabelData } from "./utils.js";
 import {
   Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card"
-import {Form} from 'react-router-dom';
-import {ArrowDownLeftFromSquare} from 'lucide-react';
 
 ChartJS.register(
   CategoryScale,
@@ -84,29 +77,20 @@ export const options = {
 
 export function BarChart({ data: barData, labelKey = "", dataKey = "", onClick}) {
   const chartRef = useRef()
-  useEffect(() => {
-    console.log('BarChart Render');
-  });
   let { labels, data } = splitLabelData(barData, labelKey, dataKey);
-  //console.log("bar", { labels, data }, barData);
   let labelDataSets = {
     labels,
     datasets: [
       {
         label: "Heroes",
         data,
-        //backgroundColor: ["#e57373", "#e0e0e0", "#FFF59D"],
       },
     ],
   };
   const handleClick = (event) => {
-    //console.log('getDatasetAtEvent', getDatasetAtEvent(chartRef.current, event));
-    //console.log('getElementAtEvent', getElementAtEvent(chartRef.current, event));
-    //console.log('getElementsAtEvent', getElementsAtEvent(chartRef.current, event));
     let events = getElementAtEvent(chartRef.current, event);
     if(events?.length) {
       let index = events[0]?.index;
-      //console.log('index', labels[index]);
       onClick(labels[index]);
     }
     return;
