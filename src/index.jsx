@@ -9,7 +9,7 @@ import './index.css'
 import App  from './app.jsx';
 import Dashboard, {loader as dashboardLoader}  from './dashboard/index.jsx';
 import DashboardCharts, {loader as chartLoader}  from './dashboard/charts.jsx';
-import SuperHeroTable, {action as superHeroAction } from './superhero-table/index.jsx';
+import SuperHeroTable, {loader as superHeroLoader, action as superHeroAction } from './superhero-table/index.jsx';
 import ErrorPage from './error-page.jsx';
 
 
@@ -36,6 +36,7 @@ const router = createBrowserRouter(
           path: 'dashboard',
           loader: dashboardLoader,
           Component: Dashboard,
+          ErrorBoundary: ErrorPage,
           children: [
             {
               index: true,
@@ -45,13 +46,16 @@ const router = createBrowserRouter(
               path: 'charts',
               loader: chartLoader,
               Component: DashboardCharts,
+              ErrorBoundary: ErrorPage,
             }
           ]
         },
         {
           path: 'superhero-table',
-          action: superHeroAction,
-          Component: SuperHeroTable
+          loader: superHeroLoader,
+          //action: superHeroAction,
+          Component: SuperHeroTable,
+          ErrorBoundary: ErrorPage,
         }
       ]
     },

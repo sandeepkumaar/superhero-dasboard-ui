@@ -1,10 +1,11 @@
+import {useRef} from 'react';
 import {
   Chart as ChartJS,
   ArcElement,
   Tooltip,
   Legend,
 } from "chart.js";
-import { Doughnut } from "react-chartjs-2";
+import { Doughnut, getElementAtEvent } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { splitLabelData } from "./utils.js";
 import {
@@ -48,22 +49,32 @@ const getOptions = ({titleOpts={}, legendOpts={}}) => {
   };
 }
 
-export function DoughnutChart({ data: doughnutData, labelKey = "", dataKey = "", option }) {
+export function DoughnutChart({ data: doughnutData, labelKey = "", dataKey = "", option , onClick}) {
+  let chartRef = useRef();
   let { labels, data } = splitLabelData(doughnutData, labelKey, dataKey);
-  //console.log("bar", { labels, data }, barData);
   let labelDataSets = {
     labels,
     datasets: [
       {
         label: "Heroes",
         data,
-        //backgroundColor: ["#e57373", "#e0e0e0", "#FFF59D"],
       },
     ],
   };
+
+  let handleClick = (event) => {
+    let events = getElementAtEvent(chartRef.current, event);
+    if(events?.length) {
+      let index = events[0]?.index;
+      //console.log('index', labels[index], events);
+      onClick(labels[index]);
+    }
+    return;
+  }
+
   return (
     <Card className='h-full p-4'>
-      <Doughnut options={getOptions(option)} data={labelDataSets} />
+      <Doughnut options={getOptions(option)} data={labelDataSets} onClick={handleClick} ref={chartRef}/>
     </Card>
   )
 }

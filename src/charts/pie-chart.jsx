@@ -80,15 +80,12 @@ export function PieChart({
 }) {
   const chartRef = useRef();
   let { labels, data } = splitLabelData(pieData, labelKey, dataKey);
-  //console.log('pieData', {labels, data});
   let labelDataSets = {
     labels,
     datasets: [
       {
         label: "Heroes",
         data,
-        //backgroundColor: ["#e57373", "#e0e0e0", "#FFF59D"],
-        //backgroundColor: ["#64b5f6", "#f48fb1", "#ffcc80"],
         
       },
     ],
@@ -97,7 +94,6 @@ export function PieChart({
     let events = getElementAtEvent(chartRef.current, event);
     if(events?.length) {
       let index = events[0]?.index;
-      //console.log('index', labels[index], events);
       onClick(labels[index]);
     }
     return;

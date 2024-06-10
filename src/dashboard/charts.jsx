@@ -1,11 +1,14 @@
 import {useState} from 'react'
-import { useLoaderData, useSubmit } from 'react-router-dom';
+import { useLoaderData, useSubmit, useNavigate, createSearchParams } from 'react-router-dom';
 import { PieChart, BarChart, DoughnutChart } from "../charts/index.jsx";
 import {
   fetchHeroesByProperty,
 } from "../service";
 
 import partition from "just-partition";
+import filterObj from 'just-filter-object';
+import { defined } from '../utils.js';
+
 
 export async function loader({ request }) {
   const url = new URL(request.url);
@@ -34,6 +37,7 @@ const consolidateRacers = function (data = []) {
 };
 
 export default function ChartDashboard() {
+  // hooks
   let {
     heroesByGender,
     heroesByAlignment,
@@ -41,25 +45,25 @@ export default function ChartDashboard() {
     publisher,
   } = useLoaderData();
   
-  let submit = useSubmit();
+  let navigate = useNavigate();
 
+  // derived states
   heroesByRace = consolidateRacers(heroesByRace)
- 
-  //let [heroesByGender, setHeroesByGender] = useState(loaderData.heroesByGender);
-  //let [heroesByRace, setHeroesByRace] = useState(
-  //  consolidateRacers(loaderData.heroesByRace)
-  //);
-  //let [heroesByAlignment, setHeroesByAlignment] = useState(
-  //  loaderData.heroesByAlignment
-  //);
-  
-  let handleGenderClick = (gender) => {
-    let payload = { gender, publisher };
-    return submit(payload, {method: 'post', action:'/superhero-table', encType: 'application/json'})
+
+  // handlers
+  let handleChartClick = (o={}) => {
+    let payload = { publisher, ...o };
+    payload = filterObj(payload, defined); 
+    let searchString = new URLSearchParams(payload).toString();
+    return navigate(`/superhero-table?${searchString}`) 
   }
+
+
+  // utils
   const getTitle = (title) => {
     return publisher ? `${publisher}: ${title}` : title;
   };
+
   return (
     <>
       <PieChart
@@ -67,13 +71,14 @@ export default function ChartDashboard() {
         labelKey="gender"
         dataKey="count"
         option={{ titleOpts: { text: getTitle("Gender") } }}
-        onClick={handleGenderClick}
+        onClick={(gender) => handleChartClick({gender})}
       />
       <DoughnutChart
         data={heroesByAlignment}
         labelKey="alignment"
         dataKey="count"
         option={{ titleOpts: { text: getTitle("Alignment") } }}
+        onClick={(alignment) => handleChartClick({alignment})}
       />
       <div className="col-span-2">
         <PieChart
@@ -84,6 +89,7 @@ export default function ChartDashboard() {
             titleOpts: { text: getTitle("Race") },
             legendOpts: { position: "right" },
           }}
+        onClick={(race) => handleChartClick({race})}
         ></PieChart>
       </div>
 

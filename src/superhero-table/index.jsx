@@ -1,7 +1,15 @@
-import { useActionData } from 'react-router-dom'
+import { useActionData, useLoaderData } from 'react-router-dom'
 import { fetchSuperHeroes } from '../service.js'
 import {DataTable} from '@/components/ui/data-table.jsx';
 
+export async function loader({request}) {
+  const url = new URL(request.url);
+  const body = Object.fromEntries(url.searchParams);
+  console.log('SuperHeroTable Loader', body);
+  let { data: superHeroes } = await fetchSuperHeroes(body);
+  //console.log('SuperHeroTable Action', superHeroes);
+  return {superHeroes};
+}
 
 export async function action({request}) {
   let body = await request.json();
@@ -19,6 +27,18 @@ const columns = [
   {
     accessorKey: "name",
     header: "name"
+  },
+  {
+    accessorKey: "publisher",
+    header: "publisher"
+  },
+  {
+    accessorKey: "gender",
+    header: "gender"
+  },
+  {
+    accessorKey: "race",
+    header: "race"
   },
   {
     accessorKey: "intelligence",
@@ -44,14 +64,6 @@ const columns = [
     accessorKey: "combat",
     header: "combat"
   },
-  {
-    accessorKey: "gender",
-    header: "gender"
-  },
-  {
-    accessorKey: "race",
-    header: "race"
-  },
 /*
 height: "$appearance.height",
 weight: "$appearance.weight",
@@ -63,8 +75,9 @@ hairColor: "$appearance.hairColor",
 
 export default function SuperHeroTable() {
   let actionData = useActionData() || {};
+  let loaderData = useLoaderData() || {};
   //console.log('actionData', actionData);
-  let data = actionData.superHeroes || [];
+  let data = actionData.superHeroes || loaderData.superHeroes || [];
 
   return (
     <div>
