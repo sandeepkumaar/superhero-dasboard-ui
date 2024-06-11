@@ -38,33 +38,33 @@ export default function SuperHeroTable() {
 
 
   const columns = [
-    {
-      id: "select",
-      header: ({ table }) => (
-        <Checkbox
-          checked={
-            table.getIsAllPageRowsSelected() ||
-            (table.getIsSomePageRowsSelected() && "indeterminate")
-          }
-          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-          aria-label="Select all"
-        />
-      ),
-      cell: ({ row }) => (
-        <Checkbox
-          checked={row.getIsSelected()}
-          onCheckedChange={(value) => {
-            row.toggleSelected(!!value)
-            console.log('row', row.original);
-          }}
-          aria-label="Select row"
-        />
-      ),
-    },
-    {
-      accessorKey: "id",
-      header: "id",
-    },
+    //{
+    //  id: "select",
+    //  header: ({ table }) => (
+    //    <Checkbox
+    //      checked={
+    //        table.getIsAllPageRowsSelected() ||
+    //        (table.getIsSomePageRowsSelected() && "indeterminate")
+    //      }
+    //      onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+    //      aria-label="Select all"
+    //    />
+    //  ),
+    //  cell: ({ row }) => (
+    //    <Checkbox
+    //      checked={row.getIsSelected()}
+    //      onCheckedChange={(value) => {
+    //        row.toggleSelected(!!value)
+    //        console.log('row', row.original);
+    //      }}
+    //      aria-label="Select row"
+    //    />
+    //  ),
+    //},
+    //{
+    //  accessorKey: "id",
+    //  header: "id",
+    //},
     {
       accessorKey: "name",
       header: "name",
