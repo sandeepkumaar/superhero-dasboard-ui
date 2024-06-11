@@ -73,7 +73,7 @@ export function DoughnutChart({ data: doughnutData, labelKey = "", dataKey = "",
   }
 
   return (
-    <Card className='h-full p-4'>
+    <Card className='h-full p-4 cursor-pointer'>
       <Doughnut options={getOptions(option)} data={labelDataSets} onClick={handleClick} ref={chartRef}/>
     </Card>
   )

@@ -1,2 +1,1 @@
-
-export const defined = (key, value) => value !== undefined && value !== null
+export const defined = (key, value) => value !== undefined && value !== null;

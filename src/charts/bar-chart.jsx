@@ -97,7 +97,7 @@ export function BarChart({ data: barData, labelKey = "", dataKey = "", onClick})
 
   }
   return (
-    <Card className='h-full p-4'>
+    <Card className='h-full p-4 cursor-pointer'>
       <Bar options={options} data={labelDataSets} onClick={handleClick} ref={chartRef}/>
     </Card>
   )

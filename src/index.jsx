@@ -10,6 +10,7 @@ import App  from './app.jsx';
 import Dashboard, {loader as dashboardLoader}  from './dashboard/index.jsx';
 import DashboardCharts, {loader as chartLoader}  from './dashboard/charts.jsx';
 import SuperHeroTable, {loader as superHeroLoader, action as superHeroAction } from './superhero-table/index.jsx';
+import SuperHero from './superhero-table/super-hero.jsx';
 import ErrorPage from './error-page.jsx';
 
 
@@ -37,6 +38,9 @@ const router = createBrowserRouter(
           loader: dashboardLoader,
           Component: Dashboard,
           ErrorBoundary: ErrorPage,
+          shouldRevalidate: function({currentUrl}) {
+            return false;
+          },
           children: [
             {
               index: true,
@@ -56,9 +60,14 @@ const router = createBrowserRouter(
           //action: superHeroAction,
           Component: SuperHeroTable,
           ErrorBoundary: ErrorPage,
+        },
+        {
+          path: '/superhero/:id',
+          Component: SuperHero,
+          ErrorBoundary: ErrorPage,
         }
       ]
-    },
+  },
   ]
 )
 

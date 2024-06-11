@@ -75,7 +75,7 @@ export function PieChart({
   let options = getOptions(option);
   return (
 
-    <Card className='w-full h-full p-4'>
+    <Card className='w-full h-full p-4 cursor-pointer'>
         <Pie data={labelDataSets} width={360} height={360} options={options} onClick={handleClick} ref={chartRef}></Pie>
     </Card>
 
