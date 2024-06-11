@@ -25,15 +25,17 @@ Heroes with different publishers and show Categories like Gender, Alignment, Rac
 All Visualisation are interactive. if you want to get specific data click on the Chart axis  
 
 ![Dashboard](./images/dashboard.png)
+![Dashboard](./images/dc-heroes.png)
 
 ### Hero List 
 Navigated from Charts for filtered lists or from Navigation menu for complete list. Tables are paginated
 
-![Table](./images/table.png)
+![Table](./images/all-heroes.png)
+![Table](./images/filter.png)
 
 ### Individual Hero Detail
 Onclick of Hero name in the Hero Table shows Hero details
-![Hero](./images/hero.png)
+![Hero](./images/card.png)
 
 ### Note: 
 - All navigations are based on routes and even if reloaded the data is fetched without breaking.   
