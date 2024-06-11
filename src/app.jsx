@@ -8,10 +8,6 @@ export default function App() {
     <div className="relative flex min-h-screen flex-col bg-background">
       <header className="header sticky top-0 z-50 row-span-1 h-16 mb-4 bg-primary text-primary-foreground">
         <div className="flex">
-          <h4 className="scroll-m-20 text-xl tracking-tight p-4 border-r">
-          <Button className="text-lg text-primary-foreground" variant="link"><Link>App</Link></Button>
-          
-          </h4>
           <h5 className="scroll-m-20 tracking-tight p-4">
             <Button className="text-lg text-primary-foreground" variant="link"><Link to='/dashboard'>Dashboard</Link></Button>
           </h5>
