@@ -17,7 +17,7 @@ npm install
 npm run start:local
 ```
 ## Framework & Tools rational
-Documented ![here](./notes)
+Documented [here](./notes)
 
 ## Flow
 ### Dashboard
