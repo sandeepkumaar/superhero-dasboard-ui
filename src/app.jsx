@@ -1,32 +1,24 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
+import { Button } from '@/components/ui/button.jsx'
 
-
-//export async function action({ request }) {
-//  console.log("App Action Called ::");
-//  let formData = await request.formData();
-//  let publisher = formData.get("publisher");
-//  let { data: heroesByGender } = await fetchHeroesByProperty("gender", {
-//    publisher,
-//  });
-//  let { data: heroesByAlignment } = await fetchHeroesByProperty("alignment", {
-//    publisher,
-//  });
-//  let { data: heroesByRace } = await fetchHeroesByProperty("race", {
-//    publisher,
-//  });
-//  return {
-//    heroesByGender,
-//    heroesByAlignment,
-//    heroesByRace,
-//  };
-//}
 
 export default function App() {
 
   return (
     <div className="relative flex min-h-screen flex-col bg-background">
-      <header className="header sticky top-0 z-50 row-span-1 h-16 p-4 mb-4 bg-primary text-primary-foreground">
-        <h4 className="scroll-m-20 text-xl tracking-tight">Super Hero App</h4>
+      <header className="header sticky top-0 z-50 row-span-1 h-16 mb-4 bg-primary text-primary-foreground">
+        <div className="flex">
+          <h4 className="scroll-m-20 text-xl tracking-tight p-4 border-r">
+          <Button className="text-lg text-primary-foreground" variant="link"><Link>App</Link></Button>
+          
+          </h4>
+          <h5 className="scroll-m-20 tracking-tight p-4">
+            <Button className="text-lg text-primary-foreground" variant="link"><Link to='/dashboard'>Dashboard</Link></Button>
+          </h5>
+          <h5 className="scroll-m-20 tracking-tight p-4">
+            <Button className="text-lg text-primary-foreground" variant="link"><Link to='/superhero-table'>Heroes</Link></Button>
+          </h5>
+        </div>
       </header>
       <main className="main flex-1 pb-8 container ">
         <Outlet/>
@@ -35,5 +27,3 @@ export default function App() {
   );
 }
 
-/*
-*/
